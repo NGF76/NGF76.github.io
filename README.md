@@ -1,1 +1,348 @@
-# NGF76.github.io
+# NGF76.github.io<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGF | الروابط الاجتماعية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a1b26;
+            --secondary: #16161e;
+            --accent: #7aa2f7;
+            --text: #a9b1d6;
+            --text-light: #c0caf5;
+            --youtube: #ff0000;
+            --twitch: #9147ff;
+            --twitter: #1da1f2;
+            --instagram: #e1306c;
+            --card-bg: rgba(30, 30, 46, 0.8);
+            --transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: radial-gradient(circle at center, var(--primary), var(--secondary));
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(122, 162, 247, 0.1),
+                rgba(122, 162, 247, 0)
+            );
+            transform: rotate(30deg);
+            z-index: -1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), #2ac3de);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+            box-shadow: 0 8px 24px rgba(122, 162, 247, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+        .avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 32px rgba(122, 162, 247, 0.4);
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-light);
+            margin-bottom: 8px;
+            background: linear-gradient(to right, var(--text-light), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .bio {
+            font-size: 1rem;
+            color: var(--text);
+            opacity: 0.8;
+            max-width: 80%;
+            margin: 0 auto;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 30px 0;
+        }
+
+        .link-card {
+            background: rgba(26, 27, 38, 0.6);
+            padding: 16px 20px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            transition: var(--transition);
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .link-card:hover {
+            transform: translateY(-3px);
+            background: rgba(36, 37, 48, 0.8);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--link-color);
+            transition: var(--transition);
+        }
+
+        .link-card:hover::before {
+            width: 6px;
+        }
+
+        .link-icon {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: white;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .link-card:hover .link-icon {
+            transform: scale(1.1);
+            background: var(--link-color);
+        }
+
+        .link-content {
+            flex: 1;
+            text-align: right;
+        }
+
+        .link-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 4px;
+        }
+
+        .link-desc {
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 30px;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text);
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px);
+            color: white;
+            background: var(--link-color);
+            box-shadow: 0 6px 16px var(--link-shadow);
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 24px;
+                border-radius: 20px;
+            }
+            
+            .avatar {
+                width: 84px;
+                height: 84px;
+                font-size: 2rem;
+            }
+            
+            h1 {
+                font-size: 1.6rem;
+            }
+            
+            .link-card {
+                padding: 14px 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="avatar">NGF</div>
+            <h1>الروابط الاجتماعية</h1>
+            <p class="bio">تابعني على جميع المنصات</p>
+        </div>
+        
+        <div class="links">
+            <!-- يوتيوب -->
+            <div class="link-card" 
+                 style="--link-color: var(--youtube); --link-shadow: rgba(255, 0, 0, 0.2))"
+                 onclick="window.open('http://www.youtube.com/@NGFQ1','_blank')">
+                <div class="link-icon" style="color: var(--youtube)">
+                    <i class="fab fa-youtube"></i>
+                </div>
+                <div class="link-content">
+                    <span class="link-title">يوتيوب</span>
+                    <span class="link-desc">@NGFQ1</span>
+                </div>
+            </div>
+            
+            <!-- تويتش -->
+            <div class="link-card" 
+                 style="--link-color: var(--twitch); --link-shadow: rgba(145, 71, 255, 0.2))"
+                 onclick="window.open('https://www.twitch.tv/ngfr1?sr=a','_blank')">
+                <div class="link-icon" style="color: var(--twitch)">
+                    <i class="fab fa-twitch"></i>
+                </div>
+                <div class="link-content">
+                    <span class="link-title">تويتش</span>
+                    <span class="link-desc">ngfr1</span>
+                </div>
+            </div>
+            
+            <!-- تويتر -->
+            <div class="link-card" 
+                 style="--link-color: var(--twitter); --link-shadow: rgba(29, 161, 242, 0.2))"
+                 onclick="window.open('https://x.com/ngf51','_blank')">
+                <div class="link-icon" style="color: var(--twitter)">
+                    <i class="fab fa-twitter"></i>
+                </div>
+                <div class="link-content">
+                    <span class="link-title">تويتر (X)</span>
+                    <span class="link-desc">@ngf51</span>
+                </div>
+            </div>
+            
+            <!-- إنستغرام -->
+            <div class="link-card" 
+                 style="--link-color: var(--instagram); --link-shadow: rgba(225, 48, 108, 0.2))"
+                 onclick="window.open('https://www.instagram.com/ngf7q/','_blank')">
+                <div class="link-icon" style="color: var(--instagram)">
+                    <i class="fab fa-instagram"></i>
+                </div>
+                <div class="link-content">
+                    <span class="link-title">إنستغرام</span>
+                    <span class="link-desc">@ngf7q</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="social-links">
+            <a class="social-link" 
+               style="--link-color: var(--youtube); --link-shadow: rgba(255, 0, 0, 0.2))"
+               href="http://www.youtube.com/@NGFQ1" target="_blank">
+               <i class="fab fa-youtube"></i>
+            </a>
+            <a class="social-link" 
+               style="--link-color: var(--twitch); --link-shadow: rgba(145, 71, 255, 0.2))"
+               href="https://www.twitch.tv/ngfr1?sr=a" target="_blank">
+               <i class="fab fa-twitch"></i>
+            </a>
+            <a class="social-link" 
+               style="--link-color: var(--twitter); --link-shadow: rgba(29, 161, 242, 0.2))"
+               href="https://x.com/ngf51" target="_blank">
+               <i class="fab fa-twitter"></i>
+            </a>
+            <a class="social-link" 
+               style="--link-color: var(--instagram); --link-shadow: rgba(225, 48, 108, 0.2))"
+               href="https://www.instagram.com/ngf7q/" target="_blank">
+               <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // تأثيرات عند التحميل
+        document.addEventListener('DOMContentLoaded', () => {
+            // إضافة تأثيرات التحويم
+            document.querySelectorAll('.link-card').forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-5px)';
+                    card.style.boxShadow = '0 12px 28px rgba(0, 0, 0, 0.25)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(-3px)';
+                    card.style.boxShadow = '0 8px 24px rgba(0, 0, 0, 0.2)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
