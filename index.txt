@@ -1,0 +1,49 @@
+
+
+Color of web site edit 
+
+--primary: #1a1b26;      (old)
+--secondary: #16161e;   (old)  
+--accent: #7aa2f7;    (old) 
+ --text: #a9b1d6;
+            --text-light: #c0caf5;              (old) 
+            --youtube: #ff0000;                   (old) 
+            --twitch: #9147ff;                    (old) 
+            --twitter: #1da1f2;                   (old) 
+            --instagram: #e1306c;                    (old) 
+            --card-bg: rgba(30, 30, 46, 0.8);          (old) 
+            --transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);          (old) 
+
+.avatar:hover {
+            transform: scale(1.05);     (old) 
+            box-shadow: 0 12px 32px rgba(122, 162, 247, 0.4);         (old)   
+        }
+
+(old) 
+
+.avatar {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), #2ac3de);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+            box-shadow: 0 8px 24px rgba(122, 162, 247, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+        }
+
+
+
+name image brand :
+
+NGF LOGO Update 2.00V.png    (4k) resoltion 
+
+
+
+
