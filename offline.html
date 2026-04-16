@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>غير متصل | NGF</title>
+
+      <!-- ربط manifest.json -->
+<link rel="manifest" href="/manifest.json">
+
+<!-- أيقونات PWA لأنظمة مختلفة -->
+<link rel="apple-touch-icon" sizes="57x57" href="icons/icon-57.png">
+<link rel="apple-touch-icon" sizes="72x72" href="icons/icon-72.png">
+<link rel="apple-touch-icon" sizes="114x114" href="icons/icon-114.png">
+<link rel="apple-touch-icon" sizes="144x144" href="icons/icon-144.png">
+
+<!-- لون شريط العنوان في المتصفحات -->
+<meta name="theme-color" content="#0a0a14">
+<meta name="msapplication-TileColor" content="#0a0a14">
+<meta name="msapplication-TileImage" content="icons/icon-144.png">
+
+<!-- لشاشة البداية على iOS -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="NGF">
+
+<!-- وصف للمشاركة -->
+<meta name="description" content="الروابط الاجتماعية لمنصة NGF - تابعني على يوتيوب، تويتش، تويتر، إنستغرام">
+
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Tajawal', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #0a0a14, #05050a);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            color: #c0c5d9;
+        }
+        
+        .offline-container {
+            text-align: center;
+            max-width: 400px;
+        }
+        
+        .offline-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff, #fbbf24);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #8a8fa8;
+        }
+        
+        .retry-btn {
+            background: linear-gradient(135deg, #00d4ff, #a855f7);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 2rem;
+            color: white;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .retry-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">
+            <i class="fas fa-wifi-slash"></i>
+        </div>
+        <h1>⚠️ غير متصل</h1>
+        <p>يبدو أنك غير متصل بالإنترنت.<br>الرجاء التحقق من اتصالك ثم حاول مرة أخرى.</p>
+        <button class="retry-btn" onclick="location.reload()">
+            <i class="fas fa-sync-alt"></i> إعادة المحاولة
+        </button>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+
+    <script>
+    // تسجيل Service Worker
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    console.log('✅ Service Worker registered successfully:', registration.scope);
+                    
+                    // التحقق من التحديثات
+                    registration.addEventListener('updatefound', () => {
+                        const newWorker = registration.installing;
+                        console.log('🔄 New Service Worker found, updating...');
+                        newWorker.addEventListener('statechange', () => {
+                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                console.log('📢 New content available, refresh to update.');
+                                // عرض إشعار للمستخدم بتوفر تحديث
+                                showUpdateNotification();
+                            }
+                        });
+                    });
+                })
+                .catch(error => {
+                    console.error('❌ Service Worker registration failed:', error);
+                });
+        });
+    }
+    
+    // إشعار بتوفر تحديث
+    function showUpdateNotification() {
+        const toast = document.createElement('div');
+        toast.innerHTML = `
+            <div style="
+                position: fixed;
+                bottom: 20px;
+                left: 20px;
+                right: 20px;
+                background: rgba(0,0,0,0.9);
+                backdrop-filter: blur(16px);
+                border-radius: 1rem;
+                padding: 1rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                z-index: 10000;
+                border: 1px solid rgba(255,255,255,0.1);
+                direction: rtl;
+            ">
+                <span style="color: white;">🔄 تحديث جديد متاح</span>
+                <button onclick="location.reload()" style="
+                    background: linear-gradient(135deg, #00d4ff, #a855f7);
+                    border: none;
+                    padding: 0.5rem 1rem;
+                    border-radius: 2rem;
+                    color: white;
+                    cursor: pointer;
+                    font-family: inherit;
+                ">تحديث الآن</button>
+            </div>
+        `;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 10000);
+    }
+    
+    // التحقق من وضع عدم الاتصال
+    window.addEventListener('online', () => {
+        console.log('📶 Back online');
+        const toast = document.createElement('div');
+        toast.innerHTML = `<div style="
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #10b981;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            z-index: 10000;
+            font-size: 0.85rem;
+        ">✅ تم استعادة الاتصال بالإنترنت</div>`;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    });
+    
+    window.addEventListener('offline', () => {
+        console.log('📴 Offline');
+    });
+</script>
+
+    <script>
+// أداة سريعة لإنشاء أيقونات (اختياري)
+function generateIcon(size, bgColor, text) {
+    const canvas = document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = bgColor;
+    ctx.fillRect(0, 0, size, size);
+    ctx.fillStyle = 'white';
+    ctx.font = `bold ${size * 0.4}px Tajawal`;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(text, size/2, size/2);
+    return canvas.toDataURL();
+}
+// استخدمها لتوليد الأيقونات مؤقتاً
+</script>
+
+
+
+</body>
+</html>
